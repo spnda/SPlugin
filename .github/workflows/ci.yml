@@ -1,6 +1,12 @@
 name: CI
 
-on: [push]
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - 'src/**'
+      - '**.gradle'
+      - '**.properties'
 
 jobs:
   build:
