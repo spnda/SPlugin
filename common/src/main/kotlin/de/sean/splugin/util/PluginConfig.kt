@@ -31,7 +31,7 @@ class PluginConfig(config: FileConfiguration) {
 
     fun getRandomMessageOrDefault(messageList: String, default: String): String {
         val message = getRandomMessage(messageList)
-        return if (message.isEmpty()) default else message
+        return message.ifEmpty { default }
     }
 
     fun getMessageCount(messageList: String): Int {

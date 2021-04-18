@@ -3,7 +3,7 @@
 
 # Ignore Gradle build output directory
 build
-bin
+*/bin
 
 # Folders and files used by gradle and IDEs
 .vscode

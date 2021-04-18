@@ -31,9 +31,11 @@ open class InteractEvent : Listener {
         if (event.clickedBlock == null) return
         when (event.clickedBlock!!.type) {
             in sitableBlocks -> {
-                if (event.action == Action.RIGHT_CLICK_BLOCK && !player.isSneaking
-                    && event.item == null
-                    && player.hasPermission("splugin.sit")) {
+                if (event.action == Action.RIGHT_CLICK_BLOCK &&
+                    !player.isSneaking &&
+                    event.item == null &&
+                    player.hasPermission("splugin.sit")
+                ) {
                     val location = event.clickedBlock!!.location.clone()
                     if (location.world == null) return
                     // Check the above block

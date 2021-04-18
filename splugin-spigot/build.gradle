@@ -3,10 +3,6 @@ plugins {
     id 'application'
 }
 
-repositories {
-    jcenter()
-}
-
 dependencies {
     implementation project(':common')
 
