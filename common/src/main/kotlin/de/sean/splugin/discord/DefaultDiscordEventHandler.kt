@@ -4,6 +4,8 @@ import de.sean.splugin.util.ColorUtil
 import de.sean.splugin.util.Util
 import net.dv8tion.jda.api.EmbedBuilder
 import net.dv8tion.jda.api.entities.ChannelType
+import net.dv8tion.jda.api.entities.GuildChannel
+import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.events.ReadyEvent
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import net.md_5.bungee.api.ChatColor
@@ -12,7 +14,7 @@ import org.bukkit.entity.Player
 import java.util.ArrayList
 import java.util.logging.Logger
 
-class DefaultDiscordEventHandler : DiscordEventHandler() {
+open class DefaultDiscordEventHandler : DiscordEventHandler() {
     override fun onReady(event: ReadyEvent) {
         Logger.getLogger(this.javaClass.simpleName).info("Discord has started! ${event.jda.selfUser.name}")
     }
@@ -58,11 +60,15 @@ class DefaultDiscordEventHandler : DiscordEventHandler() {
             else -> {
                 val channel = Discord.instance.channels[event.guild] ?: return
                 if (channel != event.textChannel) return
-                var msg = event.message.contentStripped
-                if (event.message.attachments.size > 0) msg += if (msg.isNotEmpty()) " " else "" + "[file]" // Show a nice indicator that the person has sent a image.
-                val format = Discord.instance.discordFormat ?: "§9[user]: §r[message]" // If there is no format specified, we'll use a default one similar to minecraft's messages
-                Bukkit.broadcastMessage(format.replace("[user]", event.author.name).replace("[message]", msg))
+                broadcastMessage(event.message, channel)
             }
         }
+    }
+
+    open fun broadcastMessage(message: Message, channel: GuildChannel) {
+        var msg = message.contentStripped
+        if (message.attachments.size > 0) msg += if (msg.isNotEmpty()) " " else "" + "[file]" // Show a nice indicator that the person has sent a image.
+        val format = Discord.instance.discordFormat ?: "[user]: [message]" // If there is no format specified, we'll use a default one similar to minecraft's messages
+        Bukkit.broadcastMessage(format.replace("[user]", message.author.name).replace("[message]", msg))
     }
 }

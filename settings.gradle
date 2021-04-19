@@ -1,4 +1,4 @@
-rootProject.name = 'splugin'
+rootProject.name = 'SPlugin'
 include 'common'
 include 'splugin-paper'
 include 'splugin-spigot'

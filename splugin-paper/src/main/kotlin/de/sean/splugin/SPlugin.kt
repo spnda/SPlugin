@@ -6,6 +6,7 @@ import de.sean.splugin.bukkit.tasks.AfkPlayerManager
 import de.sean.splugin.bukkit.tasks.DiscordActivityUpdater
 import de.sean.splugin.discord.DefaultDiscordEventHandler
 import de.sean.splugin.discord.Discord
+import de.sean.splugin.discord.PaperDiscordEventHandler
 import de.sean.splugin.paper.events.*
 import de.sean.splugin.util.PluginConfig
 import org.bukkit.Bukkit
@@ -36,7 +37,7 @@ class SPlugin : JavaPlugin() {
 
         /* Discord */
         Discord(config)
-        Discord.instance.addEventListener(DefaultDiscordEventHandler())
+        Discord.instance.addEventListener(PaperDiscordEventHandler())
 
         super.onEnable()
     }

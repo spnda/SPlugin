@@ -5,6 +5,8 @@ import net.dv8tion.jda.api.JDABuilder
 import net.dv8tion.jda.api.entities.Activity
 import net.dv8tion.jda.api.entities.Guild
 import net.dv8tion.jda.api.entities.TextChannel
+import net.dv8tion.jda.api.requests.GatewayIntent
+import net.dv8tion.jda.api.utils.MemberCachePolicy
 import org.bukkit.configuration.file.FileConfiguration
 import javax.security.auth.login.LoginException
 
@@ -33,8 +35,9 @@ class Discord(config: FileConfiguration) {
         // Only initialize discord stuff if a guild, channel and token are present.
         channels = mutableMapOf() // Channels will always be initialized
         if (token != null) {
-            val builder = JDABuilder.createDefault(token)
+            val builder = JDABuilder.create(token, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS)
             try {
+                builder.setMemberCachePolicy(MemberCachePolicy.ALL)
                 builder.setActivity(Activity.playing("Minecraft"))
                 jda = builder.build()
                 jda!!.awaitReady()
