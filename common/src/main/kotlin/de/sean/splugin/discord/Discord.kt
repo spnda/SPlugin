@@ -8,6 +8,10 @@ import net.dv8tion.jda.api.entities.TextChannel
 import net.dv8tion.jda.api.requests.GatewayIntent
 import net.dv8tion.jda.api.utils.MemberCachePolicy
 import org.bukkit.configuration.file.FileConfiguration
+import org.bukkit.entity.Player
+import sun.net.www.http.HttpClient
+import java.net.HttpURLConnection
+import java.net.URL
 import javax.security.auth.login.LoginException
 
 // Simple class to handle messages, events and activity for Discord
@@ -21,6 +25,7 @@ class Discord(config: FileConfiguration) {
     private var jda: JDA? = null
 
     val channels: MutableMap<Guild, TextChannel>
+    val webhooks: MutableList<String>
     val joinMessage: Boolean
     val leaveMessage: Boolean
     val discordFormat: String?
@@ -32,6 +37,8 @@ class Discord(config: FileConfiguration) {
         joinMessage = config.getBoolean("discord.joinMessage")
         leaveMessage = config.getBoolean("discord.leaveMessage")
         discordFormat = config.getString("chatFormat.discordFormat")
+        webhooks = config.getStringList("discord.webhooks")
+
         // Only initialize discord stuff if a guild, channel and token are present.
         channels = mutableMapOf() // Channels will always be initialized
         if (token != null) {
@@ -62,9 +69,28 @@ class Discord(config: FileConfiguration) {
         if (jda != null) jda!!.addEventListener(listener)
     }
 
-    fun sendMessage(message: String) {
+    fun sendMessage(message: String, player: Player) {
+        for (webhook in webhooks) {
+            val query =
+                "{\"username\": \"${player.name}\", \"content\": \"${message}\", \"avatar_url\": \"https://crafatar.com/avatars/${player.uniqueId}?overlay\"}"
+            val queryBytes = query.toByteArray(Charsets.UTF_8)
+
+            val mUrl = URL(webhook)
+            val urlConn = mUrl.openConnection() as HttpURLConnection;
+            urlConn.doOutput = true;
+            urlConn.requestMethod = "POST";
+            urlConn.setRequestProperty("Content-Type", "application/json");
+            urlConn.setRequestProperty("Content-Length", queryBytes.size.toString())
+            urlConn.outputStream.write(queryBytes);
+            urlConn.outputStream.flush()
+            urlConn.connect()
+
+            // Connect and wait for input stream
+            urlConn.inputStream
+        }
+
         for ((_, value) in channels) {
-            value.sendMessage(message).queue()
+            value.sendMessage("**" + player.name + "**: " + message).queue()
         }
     }
 

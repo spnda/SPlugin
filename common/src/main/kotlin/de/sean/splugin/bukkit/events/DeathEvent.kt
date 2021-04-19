@@ -17,6 +17,6 @@ class DeathEvent : Listener {
         if (message.isNotEmpty()) event.deathMessage = ChatColor.RED.toString() + message
 
         /* Discord */
-        Discord.instance.sendMessage(message)
+        Discord.instance.sendMessage(message, event.entity)
     }
 }

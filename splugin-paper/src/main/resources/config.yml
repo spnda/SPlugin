@@ -14,10 +14,11 @@ chatFormat:
 # discord activity to the server and vice versa.
 discord:
   token: null # Your discord bot token
+  webhooks:
+    # List of webhook URLs to post to.
   channels:
+    # DEPRECATED! Use webhooks: instead
     # GUILD_ID: CHANNEL_ID
-    # You can have 1 channel per guild.
-    # You can define multiple combinations to stream to multiple channels in multiple guilds.
   joinMessage: false # Whether or not to send a message to discord when a player joins the server.
   leaveMessage: false # Whether or not to send a message to discord when a player leaves the server.
   activities:

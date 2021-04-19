@@ -36,7 +36,7 @@ open class JoinEvent : Listener {
         /* Discord */
         val discord = Discord.instance
         if (discord.joinMessage) {
-            discord.sendMessage(joinMessage.replace("[player]", player.name))
+            discord.sendMessage(joinMessage.replace("[player]", player.name), player)
         }
     }
 }

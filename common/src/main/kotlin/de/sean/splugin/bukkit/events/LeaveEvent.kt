@@ -22,7 +22,7 @@ class LeaveEvent : Listener {
         /* Discord */
         val discord = Discord.instance
         if (discord.leaveMessage) {
-            discord.sendMessage(quitMessage.replace("[player]", event.player.name))
+            discord.sendMessage(quitMessage.replace("[player]", event.player.name), event.player)
         }
     }
 }

@@ -30,6 +30,6 @@ class MessageEvent : Listener {
         }
 
         /* Discord */
-        Discord.instance.sendMessage("**" + player.name + "**: " + message)
+        Discord.instance.sendMessage(message, player)
     }
 }
