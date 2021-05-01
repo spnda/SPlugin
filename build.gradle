@@ -56,7 +56,7 @@ allprojects {
     }
 
     shadowJar {
-        archiveFileName = "${project.name}-${project.plugin_version}-${getArchiveClassifier().get()}.${getExtension()}"
+        archiveFileName = "${project.name}-${project.plugin_version}-${getArchiveClassifier().get()}.${archiveExtension}"
     }
 
     task copyVersionToPlugin {

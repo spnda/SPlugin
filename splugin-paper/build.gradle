@@ -10,7 +10,7 @@ dependencies {
 }
 
 application {
-    mainClassName = 'de.sean.splugin.SPlugin'
+    getMainClass().set('de.sean.splugin.SPlugin')
 }
 
 compileKotlin.kotlinOptions.jvmTarget = "1.8"
