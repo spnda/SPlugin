@@ -4,7 +4,6 @@ import de.sean.splugin.bukkit.events.*
 import de.sean.splugin.bukkit.tasks.AfkChecker
 import de.sean.splugin.bukkit.tasks.AfkPlayerManager
 import de.sean.splugin.bukkit.tasks.DiscordActivityUpdater
-import de.sean.splugin.discord.DefaultDiscordEventHandler
 import de.sean.splugin.discord.Discord
 import de.sean.splugin.discord.PaperDiscordEventHandler
 import de.sean.splugin.paper.events.*

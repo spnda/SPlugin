@@ -75,12 +75,12 @@ class Discord(config: FileConfiguration) {
             val queryBytes = query.toByteArray(Charsets.UTF_8)
 
             val mUrl = URL(webhook)
-            val urlConn = mUrl.openConnection() as HttpURLConnection;
-            urlConn.doOutput = true;
-            urlConn.requestMethod = "POST";
-            urlConn.setRequestProperty("Content-Type", "application/json");
+            val urlConn = mUrl.openConnection() as HttpURLConnection
+            urlConn.doOutput = true
+            urlConn.requestMethod = "POST"
+            urlConn.setRequestProperty("Content-Type", "application/json")
             urlConn.setRequestProperty("Content-Length", queryBytes.size.toString())
-            urlConn.outputStream.write(queryBytes);
+            urlConn.outputStream.write(queryBytes)
             urlConn.outputStream.flush()
             urlConn.connect()
 

@@ -2,12 +2,10 @@ package de.sean.splugin.discord
 
 import net.dv8tion.jda.api.entities.GuildChannel
 import net.dv8tion.jda.api.entities.Message
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextColor
 import org.bukkit.Bukkit
-import org.bukkit.Server
 import java.util.regex.Pattern
 
 class PaperDiscordEventHandler : DefaultDiscordEventHandler() {
@@ -47,10 +45,12 @@ class PaperDiscordEventHandler : DefaultDiscordEventHandler() {
                 )
             }
         }
-        Bukkit.getServer().sendMessage(Component
-            .text(author.effectiveName)
-            .color(TextColor.color(author.colorRaw))
-            .append(Component.text(": ").color(NamedTextColor.WHITE))
-            .append(component))
+        Bukkit.getServer().sendMessage(
+            Component
+                .text(author.effectiveName)
+                .color(TextColor.color(author.colorRaw))
+                .append(Component.text(": ").color(NamedTextColor.WHITE))
+                .append(component)
+        )
     }
 }

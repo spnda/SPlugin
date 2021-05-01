@@ -8,3 +8,6 @@ insert_final_newline=true
 [*.{kt,kts}]
 # IDEA auto-imports using wildcards so we will allow it
 disabled_rules=no-wildcard-imports
+
+[*.yml]
+indent_size = 2
