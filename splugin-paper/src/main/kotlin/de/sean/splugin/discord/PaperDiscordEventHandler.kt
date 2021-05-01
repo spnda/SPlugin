@@ -49,7 +49,7 @@ class PaperDiscordEventHandler : DefaultDiscordEventHandler() {
             Component
                 .text(author.effectiveName)
                 .color(TextColor.color(author.colorRaw))
-                .append(Component.text(": ").color(NamedTextColor.WHITE))
+                .append(Component.text(" > ").color(NamedTextColor.GRAY))
                 .append(component)
         )
     }

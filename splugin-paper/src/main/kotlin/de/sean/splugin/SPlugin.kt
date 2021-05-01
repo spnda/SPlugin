@@ -54,7 +54,7 @@ class SPlugin : JavaPlugin() {
         registerEvent(pm, PaperInteractEvent())
         registerEvent(pm, PaperJoinEvent(this))
         registerEvent(pm, LeaveEvent())
-        registerEvent(pm, MessageEvent())
+        registerEvent(pm, PaperMessageEvent())
         registerEvent(pm, MoveEvent())
     }
 

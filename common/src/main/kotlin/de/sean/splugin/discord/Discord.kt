@@ -87,10 +87,6 @@ class Discord(config: FileConfiguration) {
             // Connect and wait for input stream
             urlConn.inputStream
         }
-
-        for ((_, value) in channels) {
-            value.sendMessage("**" + player.name + "**: " + message).queue()
-        }
     }
 
     fun updateActivity(activity: Activity) {
