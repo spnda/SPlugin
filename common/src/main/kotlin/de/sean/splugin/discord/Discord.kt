@@ -9,7 +9,6 @@ import net.dv8tion.jda.api.requests.GatewayIntent
 import net.dv8tion.jda.api.utils.MemberCachePolicy
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.entity.Player
-import sun.net.www.http.HttpClient
 import java.net.HttpURLConnection
 import java.net.URL
 import javax.security.auth.login.LoginException

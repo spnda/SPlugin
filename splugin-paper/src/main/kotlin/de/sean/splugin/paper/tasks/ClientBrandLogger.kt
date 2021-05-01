@@ -5,6 +5,6 @@ import java.util.logging.Logger
 
 class ClientBrandLogger(private val player: Player) : Runnable {
     override fun run() {
-        Logger.getLogger(this.javaClass.simpleName).info("${player.displayName} has joined with ${player.clientBrandName}")
+        Logger.getLogger(this.javaClass.simpleName).info("${player.displayName()} has joined with ${player.clientBrandName}")
     }
 }
