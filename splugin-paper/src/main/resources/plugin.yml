@@ -6,8 +6,6 @@ authors: [ spnda ]
 description: A easy to use multifunctional paper plugin
 prefix: SPlugin
 website: https://www.github.com/spnda/SPlugin
-depend:
-  - NBTAPI
 permissions:
   splugin.lock:
     description: Allows a player to lock a chest/hopper ...
