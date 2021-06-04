@@ -42,6 +42,7 @@ class SPlugin : JavaPlugin() {
     }
 
     override fun onDisable() {
+        Discord.instance.close()
         Bukkit.getScheduler().cancelTasks(this)
         super.onDisable()
     }

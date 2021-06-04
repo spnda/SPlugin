@@ -64,6 +64,10 @@ class Discord(config: FileConfiguration) {
         }
     }
 
+    fun close() {
+        jda?.shutdownNow()
+    }
+
     fun addEventListener(listener: DiscordEventHandler) {
         if (jda != null) jda!!.addEventListener(listener)
     }
