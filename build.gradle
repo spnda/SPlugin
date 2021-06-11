@@ -38,7 +38,7 @@ allprojects {
 
     dependencies {
         plugins.withType(JavaPlugin) {
-            implementation('net.dv8tion:JDA:4.2.1_266') { exclude module: 'opus-java' }
+            implementation('net.dv8tion:JDA:4.3.0_277') { exclude module: 'opus-java' }
         }
     }
 
