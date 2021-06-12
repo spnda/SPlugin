@@ -17,8 +17,7 @@ discord:
   webhooks:
     # List of webhook URLs to post to.
   channels:
-    # DEPRECATED! Use webhooks: instead
-    # GUILD_ID: CHANNEL_ID
+    # List of channels from where discord message should be caught from.
   joinMessage: false # Whether or not to send a message to discord when a player joins the server.
   leaveMessage: false # Whether or not to send a message to discord when a player leaves the server.
   activities:

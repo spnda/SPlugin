@@ -30,6 +30,7 @@ class SPlugin : org.bukkit.plugin.java.JavaPlugin() {
 
         /* Discord */
         Discord(config)
+        Discord.instance.start()
         Discord.instance.addEventListener(DefaultDiscordEventHandler())
     }
 

@@ -3,12 +3,14 @@ package de.sean.splugin.discord
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.JDABuilder
 import net.dv8tion.jda.api.entities.Activity
-import net.dv8tion.jda.api.entities.Guild
-import net.dv8tion.jda.api.entities.TextChannel
+import net.dv8tion.jda.api.interactions.commands.OptionType
+import net.dv8tion.jda.api.interactions.commands.build.CommandData
+import net.dv8tion.jda.api.interactions.commands.build.OptionData
 import net.dv8tion.jda.api.requests.GatewayIntent
 import net.dv8tion.jda.api.utils.MemberCachePolicy
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.entity.Player
+import java.lang.RuntimeException
 import java.net.HttpURLConnection
 import java.net.URL
 import javax.security.auth.login.LoginException
@@ -23,8 +25,9 @@ class Discord(config: FileConfiguration) {
 
     private var jda: JDA? = null
 
-    val channels: MutableMap<Guild, TextChannel>
-    val webhooks: MutableList<String>
+    private val token: String?
+    val channels: List<Long>
+    private val webhooks: MutableList<String>
     val joinMessage: Boolean
     val leaveMessage: Boolean
     val discordFormat: String?
@@ -32,14 +35,19 @@ class Discord(config: FileConfiguration) {
     init {
         instance = this
 
-        val token = config.getString("discord.token")
+        token = config.getString("discord.token")
         joinMessage = config.getBoolean("discord.joinMessage")
         leaveMessage = config.getBoolean("discord.leaveMessage")
         discordFormat = config.getString("chatFormat.discordFormat")
         webhooks = config.getStringList("discord.webhooks")
+        channels = config.getLongList("discord.channels")
+    }
 
-        // Only initialize discord stuff if a guild, channel and token are present.
-        channels = mutableMapOf() // Channels will always be initialized
+    /**
+     * Start this Discord instance, creating the JDA instance and waiting for it
+     * to start properly and run. Also registers any slash commands that we want.
+     */
+    fun start() {
         if (token != null) {
             val builder = JDABuilder.create(token, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS)
             try {
@@ -47,19 +55,30 @@ class Discord(config: FileConfiguration) {
                 builder.setActivity(Activity.playing("Minecraft"))
                 jda = builder.build()
                 jda!!.awaitReady()
+
+                // Update the commands as interactions.
+                // This might take up to an hour to be activated properly.
+                val commands = jda!!.updateCommands()
+
+                commands.addCommands(
+                    CommandData("help", "Get some help regarding this bot.")
+                )
+                commands.addCommands(
+                    CommandData("players", "Get a list of online players.")
+                )
+                commands.addCommands(
+                    CommandData("msg", "Private message a player on the server")
+                        .addOptions(OptionData(OptionType.STRING, "player-name", "The player's name to msg.")
+                            .setRequired(true))
+                        .addOptions(OptionData(OptionType.STRING, "message", "The message to send")
+                            .setRequired(true))
+                )
+
+                commands.queue()
             } catch (e: LoginException) {
                 e.printStackTrace()
             } catch (e: InterruptedException) {
                 e.printStackTrace()
-            }
-            val inChannels = config.getConfigurationSection("discord.channels")!!.getValues(true)
-            for ((key, value) in inChannels) {
-                if (key == null) break
-                val guild = jda!!.getGuildById(key)
-                if (guild != null) {
-                    val channel = guild.getTextChannelById(value.toString())
-                    if (channel != null) channels[guild] = channel
-                }
             }
         }
     }

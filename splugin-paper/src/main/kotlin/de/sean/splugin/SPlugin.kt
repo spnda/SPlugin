@@ -36,6 +36,7 @@ class SPlugin : JavaPlugin() {
 
         /* Discord */
         Discord(config)
+        Discord.instance.start()
         Discord.instance.addEventListener(PaperDiscordEventHandler())
 
         super.onEnable()
