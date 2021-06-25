@@ -3,12 +3,10 @@ package de.sean.splugin.paper.events
 import de.sean.splugin.bukkit.tasks.AfkPlayerManager
 import de.sean.splugin.discord.Discord
 import io.papermc.paper.event.player.AsyncChatEvent
-import net.kyori.adventure.audience.Audience
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.event.ClickEvent
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.serializer.plain.PlainComponentSerializer
-import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 
@@ -16,7 +14,7 @@ class PaperMessageEvent : Listener {
     @EventHandler
     fun chatEvent(event: AsyncChatEvent) {
         val player = event.player
-        
+
         event.renderer { messageAuthor, sourceDisplayName, message, _ ->
             Component.text()
                 .append(

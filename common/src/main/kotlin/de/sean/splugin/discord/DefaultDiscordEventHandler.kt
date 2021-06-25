@@ -1,9 +1,7 @@
 package de.sean.splugin.discord
 
 import de.sean.splugin.util.ColorUtil
-import de.sean.splugin.util.Util
 import net.dv8tion.jda.api.EmbedBuilder
-import net.dv8tion.jda.api.entities.ChannelType
 import net.dv8tion.jda.api.entities.GuildChannel
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.events.ReadyEvent

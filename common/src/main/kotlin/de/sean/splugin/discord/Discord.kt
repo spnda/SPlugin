@@ -10,7 +10,6 @@ import net.dv8tion.jda.api.requests.GatewayIntent
 import net.dv8tion.jda.api.utils.MemberCachePolicy
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.entity.Player
-import java.lang.RuntimeException
 import java.net.HttpURLConnection
 import java.net.URL
 import javax.security.auth.login.LoginException
@@ -68,10 +67,14 @@ class Discord(config: FileConfiguration) {
                 )
                 commands.addCommands(
                     CommandData("msg", "Private message a player on the server")
-                        .addOptions(OptionData(OptionType.STRING, "player-name", "The player's name to msg.")
-                            .setRequired(true))
-                        .addOptions(OptionData(OptionType.STRING, "message", "The message to send")
-                            .setRequired(true))
+                        .addOptions(
+                            OptionData(OptionType.STRING, "player-name", "The player's name to msg.")
+                                .setRequired(true)
+                        )
+                        .addOptions(
+                            OptionData(OptionType.STRING, "message", "The message to send")
+                                .setRequired(true)
+                        )
                 )
 
                 commands.queue()
