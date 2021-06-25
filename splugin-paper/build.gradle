@@ -6,7 +6,7 @@ plugins {
 dependencies {
     implementation project(':common')
 
-    compileOnly 'com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT' // Paper
+    compileOnly 'io.papermc.paper:paper-api:1.17-R0.1-SNAPSHOT' // Paper
 }
 
 application {
