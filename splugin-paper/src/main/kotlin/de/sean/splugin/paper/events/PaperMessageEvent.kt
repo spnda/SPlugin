@@ -6,7 +6,7 @@ import io.papermc.paper.event.player.AsyncChatEvent
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.event.ClickEvent
 import net.kyori.adventure.text.format.NamedTextColor
-import net.kyori.adventure.text.serializer.plain.PlainComponentSerializer
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 
@@ -34,7 +34,7 @@ class PaperMessageEvent : Listener {
             AfkPlayerManager.unmarkPlayerAfk(player)
         }
 
-        val messageString = PlainComponentSerializer.plain().serialize(event.message())
+        val messageString = PlainTextComponentSerializer.plainText().serialize(event.message())
         Discord.instance.sendMessage(messageString, player)
     }
 }
