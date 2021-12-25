@@ -3,6 +3,7 @@ package de.sean.splugin
 import de.sean.splugin.bukkit.events.*
 import de.sean.splugin.bukkit.tasks.AfkChecker
 import de.sean.splugin.bukkit.tasks.AfkPlayerManager
+import de.sean.splugin.bukkit.tasks.AutoShutdown
 import de.sean.splugin.bukkit.tasks.DiscordActivityUpdater
 import de.sean.splugin.discord.DefaultDiscordEventHandler
 import de.sean.splugin.discord.Discord
@@ -32,6 +33,8 @@ class SPlugin : org.bukkit.plugin.java.JavaPlugin() {
         Discord(config)
         Discord.instance.start()
         Discord.instance.addEventListener(DefaultDiscordEventHandler())
+
+        AutoShutdown.registerTasks(this)
     }
 
     override fun onDisable() {

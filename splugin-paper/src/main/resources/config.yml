@@ -24,6 +24,11 @@ discord:
     - "Minecraft"
     - "[players] online!"
 
+# autoshutdown shuts down the server every day at midnight.
+autoshutdown:
+  message:
+    - "[time]minutes remaining until server shutdown!"
+
 messages:
   join:
     - "§a[player] has joined the server!" # §a is light green

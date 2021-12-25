@@ -7,8 +7,5 @@ description: A easy to use multifunctional paper plugin
 prefix: SPlugin
 website: https://www.github.com/spnda/SPlugin
 permissions:
-  splugin.lock:
-    description: Allows a player to lock a chest/hopper ...
-
   splugin.sit:
     description: Allows a player to sit on stairs ...
